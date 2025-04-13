@@ -163,30 +163,33 @@
 
 		];
 
-		// 3 einzigartige Zufallsindices wählen
 		var usedIndices = [];
+		var usedQuotes = new Set();
+	
 		while (usedIndices.length < 3) {
-			var randIndex = Math.floor(Math.random() * testimonials.length);
-			if (usedIndices.indexOf(randIndex) === -1) {
-				usedIndices.push(randIndex);
-			}
+		  var randIndex = Math.floor(Math.random() * testimonials.length);
+		  var quote = testimonials[randIndex].quote;
+	
+		  if (!usedIndices.includes(randIndex) && !usedQuotes.has(quote)) {
+			usedIndices.push(randIndex);
+			usedQuotes.add(quote);
+		  }
 		}
-
-		// Ausgewählte Testimonials den 3 Slides zuweisen
+	
+		// Inhalte in die Slides einfügen
 		var slides = document.querySelectorAll('#quote-carousel .carousel-inner .item');
+	
 		for (var i = 0; i < usedIndices.length; i++) {
-			var t = testimonials[usedIndices[i]];
-			// Quote-Text einsetzen (mit Anführungszeichen)
-			var quotePara = slides[i].querySelector('p');
-			quotePara.textContent = "„" + t.quote + "“";
-			// Name und Rolle einsetzen
-			var authorSmall = slides[i].querySelector('small');
-			authorSmall.textContent = t.name + ", " + t.role;
-			// Avatar-Image setzen
-			var avatarImg = slides[i].querySelector('img');
-			var nameForUrl = t.name.replace(/ /g, "+");  // Leerzeichen durch + ersetzen
-			avatarImg.src = "https://ui-avatars.com/api/?name=" + nameForUrl + "&background=020202&color=fff&size=100";
-			avatarImg.alt = t.name;
+		  var t = testimonials[usedIndices[i]];
+		  var quotePara = slides[i].querySelector('p');
+		  var authorSmall = slides[i].querySelector('small');
+		  var avatarImg = slides[i].querySelector('img');
+		  var nameForUrl = t.name.replace(/ /g, "+");
+	
+		  quotePara.textContent = "„" + t.quote + "“";
+		  authorSmall.textContent = t.name + ", " + t.role;
+		  avatarImg.src = "https://ui-avatars.com/api/?name=" + nameForUrl + "&background=020202&color=fff&size=100";
+		  avatarImg.alt = t.name;
 		}
 
 	}); // End document ready
