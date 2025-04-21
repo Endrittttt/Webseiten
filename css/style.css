@@ -943,6 +943,31 @@ textarea {
 
 }
 
+/* Smartphones */
+@media (max-width: 600px) {
+     /* Platzhalter für deaktivierte Map */
+     #map-placeholder {
+        /* Platzhalter für deaktivierte Map */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ccc;
+        background-color: transparent;
+        border: none;
+        padding: 20px;
+        font-size: 16px;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 180px;
+        border: 1px solid #555;
+
+        max-height: 70%;
+    }
+  }
+
 /* Fixed Header
  ----------------------------------------------------------------------------- */
 .fixed-header-on .header {
